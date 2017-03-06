@@ -1,0 +1,16 @@
+parameters:
+    ezpublish.fieldType.ezmatrix.class:  xrow\MatrixBundle\FieldType\Matrix\Type
+
+    ezpublish.fieldType.ezmatrix.converter.class: xrow\MatrixBundle\Persistence\Legacy\Content\FieldValue\Converter\Matrix
+
+services:
+    ezpublish.fieldType.ezmatrix.converter:
+        class: %ezpublish.fieldType.ezmatrix.converter.class%
+        tags:
+            - {name: ezpublish.storageEngine.legacy.converter, alias: ezmatrix, lazy: true, callback: '::create'}
+
+    ezpublish.fieldType.ezmatrix:
+        class: %ezpublish.fieldType.ezmatrix.class%
+        parent: ezpublish.fieldType
+        tags:
+            - {name: ezpublish.fieldType, alias: ezmatrix}
